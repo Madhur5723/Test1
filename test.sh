@@ -1,14 +1,21 @@
 #!/bin/bash
 
-echo "Enter file/dir/executablefile name: "
-read -r file
+echo "Passed arguments: $@"
+echo "Total passing arguments: $#"
 
-if [ -f "$file" ]; then
-    echo "File is a regular file."
-elif [ -x "$file" ]; then 
-    echo "File is an executable file."
-elif [ -d "$file" ]; then
-    echo "It is a directory."
-else
-    echo "Invalid ."
-fi
+for context in "$@";do
+
+    if [ -d "$context" ]; then
+        echo "The input '$context' is a directory."
+
+    elif [ -x "$context" ]; then
+        echo "The input '$context' is an executable."
+
+    elif [ -f "$context" ]; then
+        echo "The input '$context' is a file."
+
+    else
+        echo "The input '$context' is neither an executable, file, nor directory."
+    fi
+    
+done
